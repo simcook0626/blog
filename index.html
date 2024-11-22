@@ -3,50 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 공적조서 작성 서비스</title>
-    <link rel="stylesheet" href="style.css">
+    <title>네이버 블로그 작성 폼</title>
 </head>
 <body>
-    <!-- 헤더 -->
-    <header>
-        <h1>AI 공적조서 작성 서비스</h1>
-        <nav>
-            <a href="#home">홈</a>
-            <a href="#form">서비스</a>
-            <a href="#contact">문의하기</a>
-        </nav>
-    </header>
+    <!-- 폼 -->
+    <form id="blogForm">
+        <label for="title">글의 주제:</label>
+        <input type="text" id="title" name="title" placeholder="예: '가을 여행 추천지'" required>
+        <label for="keywords">포함하고 싶은 키워드:</label>
+        <input type="text" id="keywords" name="keywords" placeholder="예: '여행, 가을, 추천'">
+        <label for="target">대상 독자:</label>
+        <input type="text" id="target" name="target" placeholder="예: '여행 초보자, 가족 여행객'">
+        <label for="content">주요 내용:</label>
+        <textarea id="content" name="content" rows="5" placeholder="본문 내용을 간략히 적어주세요."></textarea>
+        <label for="style">글의 톤과 스타일:</label>
+        <select id="style" name="style">
+            <option value="friendly">친근한</option>
+            <option value="professional">전문적인</option>
+            <option value="funny">유머러스한</option>
+        </select>
+        <label for="cta">독자 참여 유도 메시지:</label>
+        <textarea id="cta" name="cta" rows="2" placeholder="예: '댓글로 의견을 남겨주세요!'"></textarea>
+        <button type="button" onclick="generateBlog()">블로그 글 생성하기</button>
+    </form>
+    <!-- 결과 -->
+    <div id="result" style="margin-top:20px;"></div>
+    <script>
+        // JavaScript 코드 작성
+        function generateBlog() {
+            const title = document.getElementById("title").value;
+            const keywords = document.getElementById("keywords").value;
+            const target = document.getElementById("target").value;
+            const content = document.getElementById("content").value;
+            const style = document.getElementById("style").value;
+            const cta = document.getElementById("cta").value;
 
-    <!-- 메인 콘텐츠 -->
-    <main>
-        <!-- 입력 폼 섹션 -->
-        <section id="form">
-            <h2>공적조서 작성하기</h2>
-            <form id="aiForm">
-                <label for="name">이름:</label>
-                <input type="text" id="name" name="name" placeholder="이름 입력" required>
+            const blogPost = `
+                <h2>${title}</h2>
+                <p><strong>키워드:</strong> ${keywords}</p>
+                <p><strong>대상 독자:</strong> ${target}</p>
+                <p>${content}</p>
+                <p><strong>글 톤:</strong> ${style}</p>
+                <p><em>${cta}</em></p>
+            `;
 
-                <label for="achievement">업적:</label>
-                <textarea id="achievement" name="achievement" rows="5" placeholder="업적 내용을 입력하세요" required></textarea>
-
-                <button type="button" onclick="generateDocument()">생성하기</button>
-            </form>
-        </section>
-
-        <!-- 결과 섹션 -->
-        <section id="result">
-            <h2>생성된 공적조서</h2>
-            <div id="output">
-                <!-- 결과 내용이 여기에 표시됩니다 -->
-            </div>
-        </section>
-    </main>
-
-    <!-- 푸터 -->
-    <footer>
-        <p>&copy; 2024 심쿡의 AI 서비스. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+            document.getElementById("result").innerHTML = blogPost;
+        }
+    </script>
 </body>
 </html>
