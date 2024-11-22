@@ -3,51 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>네이버 블로그 작성 폼</title>
+    <title>네이버 블로그 작성 도우미</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <!-- 폼 -->
+    <h1>ChatGPT와 함께 블로그 작성</h1>
     <form id="blogForm">
-        <label for="title">글의 주제:</label>
-        <input type="text" id="title" name="title" placeholder="예: '가을 여행 추천지'" required>
-        <label for="keywords">포함하고 싶은 키워드:</label>
-        <input type="text" id="keywords" name="keywords" placeholder="예: '여행, 가을, 추천'">
-        <label for="target">대상 독자:</label>
-        <input type="text" id="target" name="target" placeholder="예: '여행 초보자, 가족 여행객'">
-        <label for="content">주요 내용:</label>
-        <textarea id="content" name="content" rows="5" placeholder="본문 내용을 간략히 적어주세요."></textarea>
-        <label for="style">글의 톤과 스타일:</label>
-        <select id="style" name="style">
-            <option value="friendly">친근한</option>
-            <option value="professional">전문적인</option>
-            <option value="funny">유머러스한</option>
+        <label for="title">블로그 제목</label>
+        <input type="text" id="title" placeholder="예: AI 기술로 바뀌는 세상" required>
+
+        <label for="keywords">키워드 (콤마로 구분)</label>
+        <input type="text" id="keywords" placeholder="예: AI, 기술, 네이버 블로그" required>
+
+        <label for="audience">대상 독자</label>
+        <input type="text" id="audience" placeholder="예: 기술에 관심 있는 독자" required>
+
+        <label for="tone">글의 톤</label>
+        <select id="tone">
+            <option value="친근한">친근한</option>
+            <option value="전문적인">전문적인</option>
+            <option value="정보 위주">정보 위주</option>
         </select>
-        <label for="cta">독자 참여 유도 메시지:</label>
-        <textarea id="cta" name="cta" rows="2" placeholder="예: '댓글로 의견을 남겨주세요!'"></textarea>
-        <button type="button" onclick="generateBlog()">블로그 글 생성하기</button>
+
+        <label for="content">본문 내용</label>
+        <textarea id="content" rows="6" placeholder="본문에서 다룰 주요 내용을 입력하세요" required></textarea>
+
+        <button type="button" onclick="generateBlogPost()">작성 요청</button>
     </form>
-    <!-- 결과 -->
-    <div id="result" style="margin-top:20px;"></div>
+
+    <div id="result">
+        <h2>생성된 블로그 글</h2>
+        <div id="generatedBlog"></div>
+    </div>
+
     <script>
-        // JavaScript 코드 작성
-        function generateBlog() {
+        async function generateBlogPost() {
             const title = document.getElementById("title").value;
             const keywords = document.getElementById("keywords").value;
-            const target = document.getElementById("target").value;
+            const audience = document.getElementById("audience").value;
+            const tone = document.getElementById("tone").value;
             const content = document.getElementById("content").value;
-            const style = document.getElementById("style").value;
-            const cta = document.getElementById("cta").value;
 
-            const blogPost = `
-                <h2>${title}</h2>
-                <p><strong>키워드:</strong> ${keywords}</p>
-                <p><strong>대상 독자:</strong> ${target}</p>
-                <p>${content}</p>
-                <p><strong>글 톤:</strong> ${style}</p>
-                <p><em>${cta}</em></p>
-            `;
+            const response = await fetch("http://localhost:3000/generate-blog", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, keywords, audience, tone, content }),
+            });
 
-            document.getElementById("result").innerHTML = blogPost;
+            const data = await response.json();
+            document.getElementById("generatedBlog").innerHTML = `<p>${data.blog.replace(/\n/g, "<br>")}</p>`;
         }
     </script>
 </body>
