@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 첫 웹페이지</title>
+</head>
+<body>
+    <h1>안녕하세요! 이것은 나의 첫 웹페이지입니다.</h1>
+    <p>HTML로 간단한 문서를 작성해 보았습니다.</p>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타일 추가한 웹 페이지</title>
+    <style>
+        /* CSS 영역 */
+        body {
+            font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+            background-color: #f0f0f0; /* 페이지 배경색 */
+            color: #333; /* 글자 색상 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            margin: 0; /* 여백 제거 */
+            padding: 0; /* 여백 제거 */
+        }
+        h1 {
+            color: #007BFF; /* 제목 색상 */
+        }
+        p {
+            font-size: 18px; /* 글자 크기 설정 */
+        }
+    </style>
+</head>
+<body>
+    <h1>안녕하세요! CSS로 꾸몄습니다</h1>
+    <p>HTML에 CSS를 추가해서 스타일링을 배워보세요.</p>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>안녕하세요!</h1>
+    <p id="message">아래 버튼을 눌러보세요.</p>
+    <button onclick="changeMessage()">눌러보세요</button>
+
+    <script>
+        function changeMessage() {
+            // JavaScript로 텍스트를 변경하는 함수
+            document.getElementById("message").innerText = "버튼을 눌렀습니다!";
+        }
+    </script>
+</body>
+</html>
+<p>이름을 입력하세요:</p>
+<input type="text" id="nameInput" placeholder="이름 입력">
+<button onclick="showName()">확인</button>
+<p id="output"></p>
+
+<script>
+    function showName() {
+        const name = document.getElementById("nameInput").value;
+        document.getElementById("output").innerText = `안녕하세요, ${name}님!`;
+    }
+</script>
+<button onclick="changeBackground()">배경색 변경</button>
+
+<script>
+    function changeBackground() {
+        document.body.style.backgroundColor = "#d1f7c4";
+    }
+</script>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 배경색 변경</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>랜덤 배경색 변경</h1>
+    <p>아래 버튼을 눌러보세요!</p>
+    <button onclick="changeBackgroundColor()">배경색 변경</button>
+
+    <script>
+        function changeBackgroundColor() {
+            const colors = ["#FF5733", "#33FF57", "#5733FF", "#F4D03F", "#7D3C98"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 이벤트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        span {
+            font-size: 24px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>마우스 이벤트</h1>
+    <p>
+        <span onmouseover="changeText(this)" onmouseout="resetText(this)">이 텍스트에 마우스를 올려보세요</span>
+    </p>
+
+    <script>
+        function changeText(element) {
+            element.innerText = "와! 변경되었습니다!";
+        }
+
+        function resetText(element) {
+            element.innerText = "이 텍스트에 마우스를 올려보세요";
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            font-size: 18px;
+            padding: 10px;
+            margin: 5px;
+            width: 100px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>간단한 계산기</h1>
+    <input type="number" id="num1" placeholder="숫자 1">
+    <input type="number" id="num2" placeholder="숫자 2">
+    <br>
+    <button onclick="calculate()">더하기</button>
+    <p id="result"></p>
+
+    <script>
+        function calculate() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const sum = num1 + num2;
+            document.getElementById("result").innerText = `결과: ${sum}`;
+        }
+    </script>
+</body>
+</html>
